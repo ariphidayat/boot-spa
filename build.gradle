@@ -24,5 +24,6 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-mustache')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
