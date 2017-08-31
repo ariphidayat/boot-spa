@@ -32,6 +32,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-undertow')
     compile('com.zaxxer:HikariCP')
     compile('org.postgresql:postgresql')
+    compile('org.flywaydb:flyway-core')
 	compile('org.springframework.security.oauth:spring-security-oauth2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
