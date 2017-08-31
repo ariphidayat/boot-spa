@@ -1,5 +1,8 @@
-# Data Source Settings
 spring:
+  main:
+    banner-mode: "off"
+
+  # Data Source Settings
   datasource:
     url: jdbc:postgresql://localhost/boot_spa
     username: postgres
@@ -11,6 +14,6 @@ security:
     client:
       clientId: arip
       clientSecret: aripsecret
-      authorized-grant-types: password, authorization_code, refresh_token
+      authorizedGrantTypes: password, authorization_code, refresh_token
       scope: read, write
       accessTokenValiditySeconds: 3600

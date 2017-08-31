@@ -13,7 +13,7 @@ public class Authority {
     @Column(name = "authority_id")
     private int id;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "email")
     private User user;
 

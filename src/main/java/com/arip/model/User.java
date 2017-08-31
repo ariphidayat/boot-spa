@@ -20,7 +20,7 @@ public class User {
     @Column
     private boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private Set<Authority> authorities;
 
     public String getEmail() {
