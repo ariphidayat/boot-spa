@@ -1,3 +1,11 @@
+# Data Source Settings
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/boot_spa
+    username: postgres
+    password: P0stgres
+
+# Security Settings
 security:
   oauth2:
     client:
