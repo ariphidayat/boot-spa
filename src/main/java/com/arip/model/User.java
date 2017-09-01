@@ -1,5 +1,7 @@
 package com.arip.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -20,6 +22,7 @@ public class User {
     @Column
     private boolean enabled;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private Set<Authority> authorities;
 

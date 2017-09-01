@@ -1,5 +1,7 @@
 package com.arip.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +15,7 @@ public class Authority {
     @Column(name = "authority_id")
     private int id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "email")
     private User user;
