@@ -8,6 +8,10 @@ spring:
     username: postgres
     password: P0stgres
 
+  data:
+    rest:
+      basePath: /api
+
 # Security Settings
 security:
   oauth2:
