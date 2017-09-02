@@ -1,9 +1,12 @@
 package com.arip.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 /**
@@ -14,14 +17,11 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column
     private String email;
 
-    @JsonIgnore
-    @Column
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
-    @Column
     private boolean enabled;
 
     @OneToMany(mappedBy = "user")

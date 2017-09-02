@@ -17,7 +17,6 @@ public class Authority {
     @JoinColumn(name = "email")
     private User user;
 
-    @Column
     private String authority;
 
     public int getId() {
