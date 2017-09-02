@@ -10,20 +10,20 @@ import javax.persistence.*;
 public class Authority {
 
     @Id
-    @Column(name = "authority_id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "user_id")
     private User user;
 
     private String authority;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
