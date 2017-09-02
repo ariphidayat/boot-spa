@@ -1,6 +1,6 @@
 create table users(
   email varchar(50),
-  password varchar(50) not null,
+  password varchar(75) not null,
   enabled boolean not null,
   constraint pk_users primary key (email)
 );
