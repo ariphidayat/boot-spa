@@ -2,9 +2,9 @@ Spring Boot for Single Page Application Project
 ===============================================
 
 ## Installation
-1. Clone this project or download Zip file
+Clone this project or download Zip file
 
-	$ git clone https://github.com/ariphidayat/boot-spa.git
+	    $ git clone https://github.com/ariphidayat/boot-spa.git
 
 ### Run Project
 On command prompt, run the following command:
