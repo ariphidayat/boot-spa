@@ -18,8 +18,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers(HttpMethod.POST,"/api/users").permitAll()
-            .antMatchers( "/api/**").hasAuthority("DEVELOPER")
-            .and()
-            .formLogin();
+            .antMatchers( "/api/**").hasAuthority("DEVELOPER");
     }
 }
