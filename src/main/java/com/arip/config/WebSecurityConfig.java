@@ -1,7 +1,6 @@
 package com.arip.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -18,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 
 @Configuration
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@Order(-20)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,7 +32,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic();
+        http
+            .formLogin()
+                .loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .permitAll()
+            .and().requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+            .and().authorizeRequests().anyRequest().authenticated();
     }
 
     @Bean
