@@ -38,8 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll()
-            .and().requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
-            .and().authorizeRequests().anyRequest().authenticated();
+                .and()
+            .requestMatchers()
+                .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/hello")
+                .and()
+            .authorizeRequests()
+                .antMatchers("/hello").hasAuthority("DEVELOPER")
+                .anyRequest().authenticated();
     }
 
     @Bean
