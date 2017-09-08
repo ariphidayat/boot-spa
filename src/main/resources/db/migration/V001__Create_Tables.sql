@@ -74,3 +74,27 @@ create table oauth_approvals (
   lastModifiedAt timestamp
 );
 -- END
+
+-- Spring Session Schema
+-- Actual Schema Location: org\springframework\session\jdbc\schema-postgresql.sql
+create table spring_session (
+  session_id char(36) not null,
+  creation_time bigint not null,
+  last_access_time bigint not null,
+  max_inactive_interval int not null,
+  principal_name varchar(100),
+  constraint pk_spring_session primary key (session_id)
+);
+create index idx_spring_session on spring_session (last_access_time);
+
+create table spring_session_attributes (
+  session_id char(36) not null,
+  attribute_name varchar(200) not null,
+  attribute_bytes bytea not null,
+  constraint pk_spring_session_attributes primary key (session_id, attribute_name),
+  constraint fk_spring_session_attributes foreign key (session_id)
+    references spring_session(session_id)
+    on delete cascade
+);
+create index idx_spring_session_attributes on spring_session_attributes (session_id);
+-- END
