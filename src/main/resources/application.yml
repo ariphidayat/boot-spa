@@ -1,8 +1,6 @@
 spring:
   main:
     banner-mode: "off"
-  session:
-    store-type: jdbc
 
   # Data Source Settings
   datasource:
