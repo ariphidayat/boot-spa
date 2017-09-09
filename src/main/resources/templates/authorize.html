@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Brand</title>
+</head>
+<body>
+    <h1>Please Confirm!</h1>
+    <form id="confirmationForm" th:action="@{/oauth/authorize}" method="post" style="display: inline;">
+        <input name="user_oauth_approval" value="true" type="hidden"/>
+        <input name="scope.openid" value="true" type="hidden"/>
+        <input name="authorize" value="Authorize" type="submit"/>
+    </form>
+    <form id="denialForm" th:action="@{/oauth/authorize}" method="post" style="display: inline;">
+        <input name="user_oauth_approval" value="false" type="hidden"/>
+        <input name="scope.openid" value="false" type="hidden"/>
+        <input name="authorize" value="Deny" type="submit"/>
+    </form>
+</body>
+</html>

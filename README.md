@@ -27,7 +27,7 @@ OAuth2 Flow
 
 - Request access_token
   
-        $ curl POST -u arip:aripsecret http://localhost:8080/oauth/token -d "grant_type=password&username=user&password=password"
+        $ curl -u arip:aripsecret http://localhost:8080/oauth/token -d "grant_type=password&username=user&password=password"
   
 - JSON response for `access_token`
 
@@ -48,7 +48,7 @@ OAuth2 Flow
 
 - Visit authorization endpoint in browser
 
-     http://localhost:8080/oauth/authorize?response_type=code&client_id=arip&redirect_uri=http://example.com
+     http://localhost:8080/oauth/authorize?response_type=code&client_id=alisiana&redirect_uri=http://example.com
         
      once you have authenticated you will get a redirect to `http://example.com` with an authorization code attached. e.g. :
      
@@ -56,7 +56,7 @@ OAuth2 Flow
         
 - Exchange `code` for an access_token
      
-        $ curl -u arip:aripsecret http://localhost:8080/oauth/token -d "grant_type=authorization_code&redirect_uri=http://example.com&code=8tWyta"
+        $ curl -u alisiana:aripsecret http://localhost:8080/oauth/token -d "grant_type=authorization_code&redirect_uri=http://example.com&code=8tWyta"
         
 - Access resource with header `Authorization: Bearer access_token`
 
@@ -65,4 +65,4 @@ OAuth2 Flow
         
 ### Grand Type : Refresh Token
         
-        curl POST -u arip:aripsecret http://localhost:8080/oauth/token -d "grant_type=refresh_token&refresh_token=6b270dc0-1351-4acb-8996-54e1f23747c3"
+        $ curl -u arip:aripsecret http://localhost:8080/oauth/token -d "grant_type=refresh_token&refresh_token=6b270dc0-1351-4acb-8996-54e1f23747c3"
