@@ -8,16 +8,43 @@ create table users(
   constraint uk_users_email unique (email)
 );
 
+create table roles (
+  id serial,
+  role varchar(50) not null,
+  constraint pk_roles primary key(id),
+  constraint uk_roles_role_name unique(role)
+);
+
+create table user_roles (
+  user_id bigint not null,
+  role_id bigint not null,
+  constraint fk_user_roles_users foreign key(user_id)
+    references users(id) match simple
+    on update restrict on delete restrict,
+  constraint fk_user_roles_roles foreign key(role_id)
+    references users(id) match simple
+    on update restrict on delete restrict
+);
+create unique index idx_user_roles on user_roles(user_id, role_id);
+
 create table authorities (
   id serial,
-  user_id bigint not null,
   authority varchar(50) not null,
   constraint pk_authorities primary key(id),
-  constraint fk_authorities_users foreign key(user_id)
-    references users(id) match simple
-    on update cascade on delete cascade
+  constraint uk_authorities_authority unique(authority)
 );
-create unique index idx_authorities on authorities(user_id, authority);
+
+create table role_authorities (
+  role_id bigint not null,
+  authority_id bigint not null,
+  constraint fk_role_authorities_roles foreign key(role_id)
+    references roles(id) match simple
+    on update restrict on delete restrict,
+  constraint fk_role_authorities_authorities foreign key(authority_id)
+    references authorities(id) match simple
+    on update restrict on delete restrict
+);
+create unique index idx_role_authorities on role_authorities(role_id, authority_id);
 -- END
 
 -- Spring Security OAuth2 Schema

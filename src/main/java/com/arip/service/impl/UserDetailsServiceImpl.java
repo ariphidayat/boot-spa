@@ -1,6 +1,7 @@
 package com.arip.service.impl;
 
 import com.arip.model.Authority;
+import com.arip.model.Role;
 import com.arip.model.User;
 import com.arip.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +31,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        List<GrantedAuthority> authorities =  buildUserAuthority(user.getAuthorities());
+        List<GrantedAuthority> authorities =  buildUserAuthority(user.getRoles());
 
         return buildUserForAuthentication(user, authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<Authority> authorities) {
+    private List<GrantedAuthority> buildUserAuthority(Set<Role> roles) {
         Set<GrantedAuthority> setAuthorities = new HashSet<>();
-        for (Authority authority : authorities) {
-            setAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
+
+        for (Role role: roles) {
+            for (Authority authority : role.getAuthorities()) {
+                setAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
+            }
         }
 
         return new ArrayList<>(setAuthorities);

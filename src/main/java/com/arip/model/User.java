@@ -24,8 +24,13 @@ public class User {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Authority> authorities;
+    @OneToMany
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "role_id",  referencedColumnName = "id")}
+    )
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -59,11 +64,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

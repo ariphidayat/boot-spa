@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Please Confirm!</h1>
+    <p th:text="'Do you authorize ' + ${authorizationRequest.clientId} + ' at ' + ${authorizationRequest.redirectUri} + ' to access your protected resources.'"/>
     <form id="confirmationForm" th:action="@{/oauth/authorize}" method="post" style="display: inline;">
         <input name="user_oauth_approval" value="true" type="hidden"/>
         <input name="scope.openid" value="true" type="hidden"/>
