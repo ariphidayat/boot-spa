@@ -3,9 +3,12 @@ package com.arip.service.impl;
 import com.arip.model.InstantMessage;
 import com.arip.service.ChatService;
 import com.arip.utils.Destinations;
+import com.arip.utils.SystemMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 /**
  * Created by Arip Hidayat on 9/29/2017.
@@ -31,5 +34,15 @@ public class ChatServiceImpl implements ChatService {
                 Destinations.Chat.publicMessages(),
                 instantMessage
         );
+    }
+
+    @Override
+    public void join(Principal user) {
+        sendPublicMessage(SystemMessages.join(user.getName()));
+    }
+
+    @Override
+    public void leave(Principal user) {
+        sendPublicMessage(SystemMessages.leave(user.getName()));
     }
 }
