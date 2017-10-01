@@ -14,5 +14,9 @@ public class Destinations {
         public static String publicMessages() {
             return "/topic/public.messages";
         }
+
+        public static String connectedUsers() {
+            return "/topic/connected.users";
+        }
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Arip Hidayat on 9/29/2017.
@@ -18,6 +20,8 @@ public class ChatServiceImpl implements ChatService {
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
+
+    private Set<String> connectedUsers = new HashSet<>();
 
     @Override
     public void sendPrivateMessage(InstantMessage instantMessage) {
@@ -38,11 +42,26 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public void join(Principal user) {
+        connectedUsers.add(user.getName());
+        updateConnectedUsers();
         sendPublicMessage(SystemMessages.join(user.getName()));
     }
 
     @Override
     public void leave(Principal user) {
+        connectedUsers.remove(user.getName());
+        updateConnectedUsers();
         sendPublicMessage(SystemMessages.leave(user.getName()));
+    }
+
+    private void updateConnectedUsers() {
+        if (!connectedUsers.contains("public")) {
+            connectedUsers.add("public");
+        }
+
+        simpMessagingTemplate.convertAndSend(
+                Destinations.Chat.connectedUsers(),
+                connectedUsers
+        );
     }
 }

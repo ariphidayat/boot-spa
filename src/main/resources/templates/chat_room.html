@@ -6,7 +6,7 @@
 </head>
 <body onload="connect()">
     <div>
-        <input id="to" type="text" placeholder="To..."/>
+        <select id="userList"></select>
         <input id="content" type="text" placeholder="Message..."/>
         <button id="sendMessage" onclick="sendMessage();">Send</button>
         <form th:action="@{/logout}" method="post" style="display: inline;">
